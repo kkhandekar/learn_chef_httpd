@@ -1,0 +1,31 @@
+---
+driver:
+  name: ec2
+  aws_ssh_key_id: kk_aws_kk
+  region: us-west-2
+  availability_zone: c
+  subnet_id: subnet-3773bc6c
+  instance_type: t2.micro
+  image_id: ami-4836a428
+  security_group_ids: sg-7ae3b901
+  retryable_tries: 120
+  associate_public_ip: true
+  interface: dns
+    
+provisioner:
+  name: chef_zero
+
+verifier:
+  name: inspec
+
+transport:
+  username: ec2-user
+  ssh_key: C:\chef-repo\cookbooks\ec2_keys\kk_aws_kk.pem
+  
+ platforms:
+  - name: centos-7.2
+
+suites:
+  - name: default
+    run_list:
+      - recipe[learn_chef_httpd::default]
